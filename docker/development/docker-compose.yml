@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+  ffxi-galaxy-mysql-db:
+    image: mysql:8.1.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 2beer4me@ffxi-galaxy
+      MYSQL_DATABASE: ffxi-galaxy
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 12345
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - .\db-data:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  ffxi-galaxy-phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    links: 
+      - ffxi-galaxy-mysql-db
+    depends_on:
+      - ffxi-galaxy-mysql-db
+    environment:
+      PMA_ARBITRARY: 0
+      PMA_HOST: ffxi-galaxy-mysql-db
+      PMA_PORT: 3306
+      
