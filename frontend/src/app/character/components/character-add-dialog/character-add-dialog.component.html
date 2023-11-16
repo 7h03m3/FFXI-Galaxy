@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Create character</h2>
+<mat-dialog-content class="mat-typography">
+  <br>
+  <mat-form-field appearance="outline" required>
+    <mat-label>Name</mat-label>
+    <input [(ngModel)]="data.name" matInput type="text">
+  </mat-form-field>
+  <mat-form-field appearance="outline" required>
+    <mat-label>Server</mat-label>
+    <input [(ngModel)]="data.server" matInput type="text">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="onSave()" [disabled]="!isValid()" mat-stroked-button>Save</button>
+  <span class="spacer"></span>
+  <button (click)="onCancel()" cdkFocusInitial color="warn" mat-stroked-button>Cancel</button>
+</mat-dialog-actions>

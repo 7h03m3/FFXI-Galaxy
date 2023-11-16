@@ -1,14 +1,17 @@
 import { InventoryContainerEnum } from '../enums/inventory-container.enum';
 import { ApiProperty } from '@nestjs/swagger';
-import { CharacterInventoryItemDto } from './character-inventory-item.dto';
+import { CharacterUpdateContainerItemDto } from './character-update-container-item.dto';
 
 export class CharacterUpdateContainerDto {
   @ApiProperty()
-  characterId: number = 0;
+  characterName: string = '';
+
+  @ApiProperty()
+  server: string = '';
 
   @ApiProperty()
   type: InventoryContainerEnum = InventoryContainerEnum.Inventory;
 
   @ApiProperty()
-  items: CharacterInventoryItemDto[] = new Array<CharacterInventoryItemDto>();
+  items: CharacterUpdateContainerItemDto[] = new Array<CharacterUpdateContainerItemDto>();
 }

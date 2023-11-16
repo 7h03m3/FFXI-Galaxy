@@ -8,6 +8,8 @@ import { CharacterInventoryContainerEntity } from './character-inventory/charact
 import { CharacterEntity } from './character/character.entity';
 import { CharacterInventoryItemEntity } from './character-inventory/character-inventory-item.entity';
 import { ControllerModule } from './controller/controller.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -29,6 +31,7 @@ import { ControllerModule } from './controller/controller.module';
     CharacterInventoryModule,
     CharacterModule,
     ControllerModule,
+    ServeStaticModule.forRoot({ rootPath: join(__dirname, '..', 'files') }),
   ],
   controllers: [],
   providers: [],

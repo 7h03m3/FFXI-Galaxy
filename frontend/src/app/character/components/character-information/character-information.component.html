@@ -1,0 +1,17 @@
+<h1>{{characterInformation.name}} ({{characterInformation.server}})</h1>
+<button (click)="onBack()" class="action-buttons" color="accent" mat-button>
+    <mat-icon>arrow_back</mat-icon>
+    Back
+</button>
+<br><br>
+<mat-form-field appearance="outline">
+    <mat-label>Inventory container</mat-label>
+    <mat-select (selectionChange)="onInventoryTypeChange($event)">
+        <mat-option *ngFor="let containerType of containerTypes" [value]="containerType">{{containerType}}</mat-option>
+    </mat-select>
+</mat-form-field>
+
+<div *ngIf="inventoryTypeString.length!= 0">
+    <app-character-inventory-list [characterId]="characterId" [containerType]="inventoryType"/>
+</div>
+

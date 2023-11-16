@@ -1,0 +1,64 @@
+<h1>Item search</h1>
+
+<mat-form-field appearance="outline">
+    <mat-label>Search string</mat-label>
+    <input (keyup.enter)="onSearch()" [(ngModel)]="searchString" matInput type="text">
+</mat-form-field>
+<mat-form-field appearance="outline">
+    <mat-label>Character</mat-label>
+    <mat-select (selectionChange)="onCharacterChange($event)" [(ngModel)]="characterFilter">
+        <mat-option *ngFor="let character of characterList" [value]="character.name">{{character.name}}</mat-option>
+    </mat-select>
+</mat-form-field>
+<button (click)="onSearch()" color="accent" mat-flat-button>Search</button>
+
+<div class="mat-elevation-z4">
+    <table [dataSource]="tableData" mat-table matSort>
+        <ng-container matColumnDef="image">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header="itemId"></th>
+            <td *matCellDef="let element" mat-cell>
+                <img [matTooltip]="element.description" src='{{getItemImage(element)}}'>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header="name">Name</th>
+            <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="character">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header="characterName">Character</th>
+            <td *matCellDef="let element" mat-cell> {{element.characterName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="location">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header="container">Location</th>
+            <td *matCellDef="let element" mat-cell> {{element.container}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="server">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header="characterServer">Server</th>
+            <td *matCellDef="let element" mat-cell> {{element.characterServer}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="count">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header="count">Count</th>
+            <td *matCellDef="let element" mat-cell> {{element.count}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <th *matHeaderCellDef mat-header-cell></th>
+            <td *matCellDef="let element" mat-cell>
+                <button (click)="openFfxiAh(element)" mat-icon-button>
+                    <mat-icon>open_in_new</mat-icon>
+                </button>
+
+            </td>
+        </ng-container>
+
+        <tr *matHeaderRowDef="tableColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: tableColumns;" mat-row></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of events"
+                   pageSize="10"></mat-paginator>
+</div>

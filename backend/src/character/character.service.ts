@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CharacterEntity } from './character.entity';
-import { DeleteResult, Repository } from 'typeorm';
+import { DeleteResult, Not, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { InventoryContainerEnum } from '../shared/enums/inventory-container.enum';
 
@@ -48,9 +48,23 @@ export class CharacterService {
 
   public async getInventory(id: number): Promise<CharacterEntity> {
     return this.repository.findOne({
-      where: { id: id },
+      where: {
+        id: id,
+        containers: {
+          items: {
+            itemId: Not(0),
+          },
+        },
+      },
       relations: {
         containers: { items: true },
+      },
+      order: {
+        containers: {
+          items: {
+            position: 'ASC',
+          },
+        },
       },
     });
   }
@@ -61,10 +75,20 @@ export class CharacterService {
         id: id,
         containers: {
           type: container,
+          items: {
+            itemId: Not(0),
+          },
         },
       },
       relations: {
         containers: { items: true },
+      },
+      order: {
+        containers: {
+          items: {
+            position: 'ASC',
+          },
+        },
       },
     });
   }

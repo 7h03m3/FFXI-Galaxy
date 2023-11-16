@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CharacterInventoryItemDto {
+export class CharacterUpdateContainerItemDto {
   @ApiProperty()
-  id: number = 0;
+  position: number = 0;
 
   @ApiProperty()
   itemId: number = 0;
@@ -11,5 +11,8 @@ export class CharacterInventoryItemDto {
   count: number = 0;
 
   @ApiProperty()
-  containerId: number = 0;
+  name: string = '';
+
+  @ApiProperty()
+  description: string = '';
 }

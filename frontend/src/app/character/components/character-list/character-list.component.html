@@ -1,0 +1,46 @@
+<h1>Characters</h1>
+
+<div class="button-container">
+  <span class="spacer"></span>
+  <button (click)="onAdd()" color="accent" mat-stroked-button>
+    <mat-icon>add</mat-icon>
+    Create
+  </button>
+</div>
+<br>
+<div class="mat-elevation-z4">
+  <table [dataSource]="tableData" mat-table matSort>
+
+    <ng-container matColumnDef="name">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header="name">Name</th>
+      <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="character">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header="name">Character</th>
+      <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="server">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header="server">Server</th>
+      <td *matCellDef="let element" mat-cell> {{element.server}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th *matHeaderCellDef mat-header-cell></th>
+      <td *matCellDef="let element" mat-cell>
+        <button (click)="onDelete(element)" mat-icon-button>
+          <mat-icon>clear</mat-icon>
+        </button>
+
+        <button (click)="onShowInfo(element)" mat-icon-button>
+          <mat-icon>assessment</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="tableColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: tableColumns;" mat-row></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of events" pageSize="10"></mat-paginator>
+</div>

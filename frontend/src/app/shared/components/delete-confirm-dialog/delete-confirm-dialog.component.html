@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Delete</h2>
+<mat-dialog-content class="mat-typography">
+  Do you really want to delete <b>{{data.itemName}}</b>?
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button [mat-dialog-close]="false" cdkFocusInitial mat-button mat-dialog-close>Cancel</button>
+  <span class="spacer"></span>
+  <button [mat-dialog-close]="true" color="warn" mat-stroked-button>Delete</button>
+</mat-dialog-actions>
+
